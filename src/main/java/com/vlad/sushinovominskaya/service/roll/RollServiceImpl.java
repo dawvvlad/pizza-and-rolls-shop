@@ -29,6 +29,12 @@ public class RollServiceImpl implements RollService {
     }
 
     @Override
+    public void update(Long id, ) {
+        Roll roll = rollRepo.find(id);
+
+    }
+
+    @Override
     public void delete(Long id) {
         Roll roll = rollRepo.find(id);
         rollRepo.delete(roll);

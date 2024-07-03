@@ -8,6 +8,7 @@ import java.util.List;
 @Repository
 public interface RollRepo {
     Roll save(Roll roll);
+    void update(Roll roll);
     void delete(Roll roll);
     List<Roll> findAll();
     Roll find(Long id);

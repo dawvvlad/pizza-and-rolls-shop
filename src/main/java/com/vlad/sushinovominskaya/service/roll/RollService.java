@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public interface RollService {
     void save(RollDTO rollDTO);
+    void update(Long id, RollDTO rollDTO);
     void delete(Long id);
     RollDTO findById(Long id);
     RollDTO findByName(String name);

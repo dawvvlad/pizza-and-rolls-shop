@@ -18,11 +18,14 @@ public class RollRepoImpl implements RollRepo {
     @Transactional
     @Override
     public Roll save(Roll roll) {
-        if(roll.getId() == null) {
-            entityManager.persist(roll);
-            return roll;
-        }
-        else return entityManager.merge(roll);
+        entityManager.persist(roll);
+        return roll;
+    }
+
+    @Transactional
+    @Override
+    public void update(Roll roll) {
+        entityManager.merge(roll);
     }
 
     @Transactional

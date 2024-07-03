@@ -17,10 +17,14 @@ public class RollSetRepoImpl implements RollSetRepo {
     @Transactional
     @Override
     public RollSet save(RollSet rollSet) {
-        if (rollSet.getId() == null) {
-            entityManager.persist(rollSet);
-            return rollSet;
-        } else return entityManager.merge(rollSet);
+        entityManager.persist(rollSet);
+        return rollSet;
+    }
+
+    @Transactional
+    @Override
+    public void update(RollSet rollSet) {
+        entityManager.merge(rollSet);
     }
 
     @Transactional

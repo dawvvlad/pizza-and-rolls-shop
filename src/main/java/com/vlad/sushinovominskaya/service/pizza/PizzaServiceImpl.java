@@ -22,13 +22,21 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public void save(PizzaDTO pizzaDTO) {
-        Pizza pizza = pizzaRepo.find(pizzaDTO.getId());
-        if (pizza != null) {
-            pizzaRepo.save(pizza);
-        } else {
-            pizza = new Pizza(pizzaDTO.getName(), pizzaDTO.getSize(), pizzaDTO.getPrice(), pizzaDTO.getImage());
-            pizzaRepo.save(pizza);
-        }
+        Pizza pizza = new Pizza(pizzaDTO.getName(), pizzaDTO.getSize(), pizzaDTO.getPrice(), pizzaDTO.getImage());
+        pizzaRepo.save(pizza);
+    }
+
+    @Override
+    public void update(Long id, String name,
+                       Long size,
+                       Long price,
+                       String imagePath) {
+        Pizza pizza = pizzaRepo.find(id);
+        pizza.setName(name);
+        pizza.setSize(size);
+        pizza.setPrice(price);
+        pizza.setImagePath(imagePath);
+        pizzaRepo.update(pizza);
     }
 
     @Override

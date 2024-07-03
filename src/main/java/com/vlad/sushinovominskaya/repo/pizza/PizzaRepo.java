@@ -8,6 +8,7 @@ import java.util.List;
 @Repository
 public interface PizzaRepo {
     Pizza save(Pizza pizza);
+    void update(Pizza pizza);
     void delete(Pizza pizza);
     List<Pizza> findAll();
     Pizza find(Long id);

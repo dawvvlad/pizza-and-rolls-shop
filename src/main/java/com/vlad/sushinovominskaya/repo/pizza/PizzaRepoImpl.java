@@ -18,13 +18,14 @@ public class PizzaRepoImpl implements PizzaRepo {
     @Transactional
     @Override
     public Pizza save(Pizza pizza) {
-        if(pizza.getId() == null) {
-            entityManager.persist(pizza);
-            return pizza;
-        }
-        else {
-            return entityManager.merge(pizza);
-        }
+        entityManager.persist(pizza);
+        return pizza;
+    }
+
+    @Transactional
+    @Override
+    public void update(Pizza pizza) {
+        entityManager.merge(pizza);
     }
 
     @Transactional
