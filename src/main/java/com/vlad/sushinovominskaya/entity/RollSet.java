@@ -23,6 +23,9 @@ public class RollSet {
     @Column(name = "цена")
     private Long price;
 
+    @Column(name = "фото")
+    private String imagePath;
+
     @ManyToMany(cascade = {CascadeType.PERSIST,
             CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
@@ -34,9 +37,10 @@ public class RollSet {
     private List<Roll> rolls;
 
     public RollSet() {}
-    public RollSet(String name, Long price) {
+    public RollSet(String name, Long price, String imagePath) {
         this.name = name;
         this.price = price;
+        this.imagePath = imagePath;
     }
 
     public void addRollToSet(Roll roll) {

@@ -27,12 +27,16 @@ public class Roll {
     @Column(name = "цена")
     private Long price;
 
+    @Column(name = "фото")
+    private String imagePath;
+
     public Roll() {}
-    public Roll(RollCategory category, String name, String composition, Long price) {
+    public Roll(RollCategory category, String name, String composition, Long price, String imagePath) {
         this.category = category;
         this.name = name;
         this.composition = composition;
         this.price = price;
+        this.imagePath = imagePath;
     }
 
     public void addRollToCategory(RollCategory category) {
