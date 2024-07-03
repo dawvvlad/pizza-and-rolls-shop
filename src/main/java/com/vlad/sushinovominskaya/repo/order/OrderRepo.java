@@ -11,4 +11,5 @@ public interface OrderRepo {
     void delete(Order order);
     List<Order> findAll();
     Order find(Long id);
+    Order findByPhoneNumber(String orderNumber);
 }

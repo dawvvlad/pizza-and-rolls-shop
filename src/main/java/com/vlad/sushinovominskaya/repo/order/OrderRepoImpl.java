@@ -2,6 +2,7 @@ package com.vlad.sushinovominskaya.repo.order;
 
 import com.vlad.sushinovominskaya.entity.Order;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,17 @@ public class OrderRepoImpl implements OrderRepo {
     @Override
     public Order find(Long id) {
         return entityManager.find(Order.class, id);
+    }
+
+    @Override
+    public Order findByPhoneNumber(String phoneNumber) {
+        try {
+            return entityManager
+                    .createQuery("select r from Order r where r.customerPhone = :phoneNumber", Order.class)
+                    .setParameter("phoneNumber", phoneNumber)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }
