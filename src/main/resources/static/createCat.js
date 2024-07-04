@@ -1,10 +1,14 @@
-fetch("http://localhost:8080/api/v1/admin/createCategory", {
+fetch("http://localhost:8080/api/v1/admin/createRoll", {
     method: "POST",
     headers: {
         "Content-type": "application/json",
     },
     body: JSON.stringify({
-        name: "Жареные",
+        name: "Филадельфия",
+        category: "Жареные",
+        composition: "соус, рис",
+        price: 200,
+        image: "hi"
         
     })
 })

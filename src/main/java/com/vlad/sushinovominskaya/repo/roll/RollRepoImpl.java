@@ -18,9 +18,9 @@ public class RollRepoImpl implements RollRepo {
 
     @Transactional
     @Override
-    public Roll save(Roll roll) {
+    public void save(Roll roll) {
         entityManager.persist(roll);
-        return roll;
+        System.out.println(roll.getName() + " " + roll.getCategory() + " " + roll.getPrice());
     }
 
     @Transactional
