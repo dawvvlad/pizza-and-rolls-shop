@@ -10,5 +10,7 @@ import java.util.List;
 public interface RollCategoryRepo {
     void save(RollCategory rollCategory);
     void update(RollCategory rollCategory);
+    RollCategory findById(Long id);
+    RollCategory findByName(String name);
     List<RollCategory> findAll();
 }

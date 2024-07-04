@@ -1,7 +1,10 @@
 package com.vlad.sushinovominskaya.service.set;
 
+import com.vlad.sushinovominskaya.dto.RollDTO;
 import com.vlad.sushinovominskaya.dto.RollSetDTO;
+import com.vlad.sushinovominskaya.entity.Roll;
 import com.vlad.sushinovominskaya.entity.RollSet;
+import com.vlad.sushinovominskaya.repo.roll.RollRepo;
 import com.vlad.sushinovominskaya.repo.set.RollSetRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +17,12 @@ import java.util.List;
 public class RollSetServiceImpl implements RollSetService {
 
     private final RollSetRepo rollSetRepo;
+    private final RollRepo rollRepo;
+
     @Autowired
-    public RollSetServiceImpl(RollSetRepo rollSetRepo) {
+    public RollSetServiceImpl(RollSetRepo rollSetRepo, RollRepo rollRepo) {
         this.rollSetRepo = rollSetRepo;
+        this.rollRepo = rollRepo;
     }
 
     @Override
@@ -46,8 +52,17 @@ public class RollSetServiceImpl implements RollSetService {
     }
 
     @Override
-    public void createRoll(RollSetDTO rollSetDTO) {
-        RollSet rollSet = rollSetRepo.find(rollSetDTO.getId());
+    public void createRollSet(RollSetDTO rollSetDTO) {
+        RollSet rollSet = new RollSet();
+        List<Roll> list = new ArrayList<>();
+        for(RollDTO roll : rollSetDTO.getRolls()) {
+            list.add(rollRepo.find(roll.getName()));
+        }
+        if (list.isEmpty()) {
+            rollSet.setRolls(Collections.emptyList());
+        } else {
+            rollSet.setRolls(list);
+        }
         rollSetRepo.save(rollSet);
     }
 
