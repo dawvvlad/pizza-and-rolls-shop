@@ -46,7 +46,7 @@ public class RollSetServiceImpl implements RollSetService {
     }
 
     @Override
-    public void save(RollSetDTO rollSetDTO) {
+    public void createRoll(RollSetDTO rollSetDTO) {
         RollSet rollSet = rollSetRepo.find(rollSetDTO.getId());
         rollSetRepo.save(rollSet);
     }

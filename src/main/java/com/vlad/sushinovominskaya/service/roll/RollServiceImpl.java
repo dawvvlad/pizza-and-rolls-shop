@@ -2,6 +2,7 @@ package com.vlad.sushinovominskaya.service.roll;
 
 import com.vlad.sushinovominskaya.dto.RollDTO;
 import com.vlad.sushinovominskaya.entity.Roll;
+import com.vlad.sushinovominskaya.entity.RollCategory;
 import com.vlad.sushinovominskaya.repo.roll.RollRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,16 +22,13 @@ public class RollServiceImpl implements RollService {
     }
 
     @Override
-    public void save(RollDTO rollDTO) {
-        Roll roll = rollRepo.find(rollDTO.getId());
-        if (roll != null) {
-            rollRepo.save(roll);
-        }
+    public void createRoll(RollDTO rollDTO) {
+        Roll roll = new Roll();
+        rollRepo.save(roll);
     }
 
     @Override
-    public void update(Long id, ) {
-        Roll roll = rollRepo.find(id);
+    public void update(Long id, RollDTO rollDTO) {
 
     }
 
@@ -59,6 +57,16 @@ public class RollServiceImpl implements RollService {
     @Override
     public List<RollDTO> findAll() {
         List<Roll> rolls = rollRepo.findAll();
+        List<RollDTO> rollDTOs = new ArrayList<>();
+        for (Roll roll : rolls) {
+            rollDTOs.add(new RollDTO(roll));
+        }
+        return rollDTOs.isEmpty() ? Collections.emptyList() : rollDTOs;
+    }
+
+    @Override
+    public List<RollDTO> findAllByCategory(String categoryName) {
+        List<Roll> rolls = rollRepo.findByCategory(categoryName);
         List<RollDTO> rollDTOs = new ArrayList<>();
         for (Roll roll : rolls) {
             rollDTOs.add(new RollDTO(roll));

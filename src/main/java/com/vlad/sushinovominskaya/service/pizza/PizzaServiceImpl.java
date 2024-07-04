@@ -21,7 +21,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public void save(PizzaDTO pizzaDTO) {
+    public void createPizza(PizzaDTO pizzaDTO) {
         Pizza pizza = new Pizza(pizzaDTO.getName(), pizzaDTO.getSize(), pizzaDTO.getPrice(), pizzaDTO.getImage());
         pizzaRepo.save(pizza);
     }

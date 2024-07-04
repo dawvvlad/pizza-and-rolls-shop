@@ -9,14 +9,16 @@ import lombok.Setter;
 public class RollDTO {
     private Long id;
     private String name;
+    private String category;
     private String composition;
     private Long price;
     private String image;
 
     public RollDTO() {}
-    public RollDTO(Long id, String name, String composition, Long price, String image) {
+    public RollDTO(Long id, String name, String category,String composition, Long price, String image) {
         this.id = id;
         this.name = name;
+        this.category = category;
         this.composition = composition;
         this.price = price;
         this.image = image;
@@ -25,6 +27,7 @@ public class RollDTO {
     public RollDTO(Roll roll) {
         this.id = roll.getId();
         this.name = roll.getName();
+        this.category = roll.getCategory().getName();
         this.composition = roll.getComposition();
         this.price = roll.getPrice();
         this.image = roll.getImagePath();

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface PizzaService {
-    void save(PizzaDTO pizzaDTO);
+    void createPizza(PizzaDTO pizzaDTO);
     void update(Long id, String name,
                 Long size,
                 Long price,

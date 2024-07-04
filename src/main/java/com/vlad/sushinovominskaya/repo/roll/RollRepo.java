@@ -11,6 +11,7 @@ public interface RollRepo {
     void update(Roll roll);
     void delete(Roll roll);
     List<Roll> findAll();
+    List<Roll> findByCategory(String categoryName);
     Roll find(Long id);
     Roll find(String name);
 }

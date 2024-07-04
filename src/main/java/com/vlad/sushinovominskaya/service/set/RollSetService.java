@@ -10,7 +10,7 @@ public interface RollSetService {
     RollSetDTO findById(Long id);
     RollSetDTO findByName(String name);
     List<RollSetDTO> findAll();
-    void save(RollSetDTO rollSetDTO);
+    void createRoll(RollSetDTO rollSetDTO);
     void delete(Long id);
 
 }

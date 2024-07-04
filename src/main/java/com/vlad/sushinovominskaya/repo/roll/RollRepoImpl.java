@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -40,6 +41,16 @@ public class RollRepoImpl implements RollRepo {
         return entityManager
                 .createQuery("from Roll", Roll.class)
                 .getResultList();
+    }
+
+    @Override
+    public List<Roll> findByCategory(String categoryName) {
+        List<Roll> rolls = entityManager
+                .createQuery("select r from Roll r where r.category.name = :name", Roll.class)
+                .setParameter("name", categoryName)
+                .getResultList();
+
+        return rolls.isEmpty() ? Collections.emptyList() : rolls;
     }
 
     @Transactional
