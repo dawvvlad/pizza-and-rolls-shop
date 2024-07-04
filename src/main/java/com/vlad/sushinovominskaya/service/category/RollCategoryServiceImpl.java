@@ -1,10 +1,10 @@
 package com.vlad.sushinovominskaya.service.category;
 
 import com.vlad.sushinovominskaya.dto.RollCategoryDTO;
-import com.vlad.sushinovominskaya.dto.RollDTO;
 import com.vlad.sushinovominskaya.entity.Roll;
 import com.vlad.sushinovominskaya.entity.RollCategory;
 import com.vlad.sushinovominskaya.repo.category.RollCategoryRepo;
+import com.vlad.sushinovominskaya.repo.roll.RollRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,25 +16,34 @@ import java.util.List;
 public class RollCategoryServiceImpl implements RollCategoryService {
 
     private final RollCategoryRepo rollCategoryRepo;
+    private final RollRepo rollRepo;
 
     @Autowired
-    public RollCategoryServiceImpl(RollCategoryRepo rollCategoryRepo) {
+    public RollCategoryServiceImpl(RollCategoryRepo rollCategoryRepo, RollRepo rollRepo) {
         this.rollCategoryRepo = rollCategoryRepo;
+        this.rollRepo = rollRepo;
     }
 
     @Override
-    public void createCategory(String name, List<Roll> rollList) {
-        RollCategory rollCategory = new RollCategory();
-        rollCategory.setName(name);
-        rollCategory.setRolls(rollList);
+    public void createCategory(String name) {
+        RollCategory rollCategory = new RollCategory(name);
         rollCategoryRepo.save(rollCategory);
+
+        System.out.println(rollCategory);
     }
 
     @Override
-    public void updateCategory(String categoryName, List<Roll> rollList) {
-        RollCategory rollCategory = rollCategoryRepo.findByName(categoryName);
-        rollCategory.setName(categoryName);
-        rollCategory.setRolls(rollList);
+    public void updateCategory(Long id, List<Long> rollIds, String name) {
+        RollCategory rollCategory = rollCategoryRepo.findById(id);
+        if(name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        } else rollCategory.setName(name);
+
+        for (Long rollId : rollIds) {
+            Roll roll = rollRepo.find(rollId);
+            rollCategory.addRoll(roll);
+        }
+
         rollCategoryRepo.update(rollCategory);
     }
 

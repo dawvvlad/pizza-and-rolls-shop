@@ -43,6 +43,7 @@ public class RollRepoImpl implements RollRepo {
                 .getResultList();
     }
 
+    @Transactional
     @Override
     public List<Roll> findByCategory(String categoryName) {
         List<Roll> rolls = entityManager

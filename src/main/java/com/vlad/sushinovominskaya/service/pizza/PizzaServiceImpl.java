@@ -24,6 +24,8 @@ public class PizzaServiceImpl implements PizzaService {
     public void createPizza(PizzaDTO pizzaDTO) {
         Pizza pizza = new Pizza(pizzaDTO.getName(), pizzaDTO.getSize(), pizzaDTO.getPrice(), pizzaDTO.getImage());
         pizzaRepo.save(pizza);
+
+        System.out.println(pizza);
     }
 
     @Override

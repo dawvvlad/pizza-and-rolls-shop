@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Роллы")
+@Table(name = "роллы")
 @Getter
 @Setter
 public class Roll {
@@ -14,7 +14,7 @@ public class Roll {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "категория")
     private RollCategory category;
 

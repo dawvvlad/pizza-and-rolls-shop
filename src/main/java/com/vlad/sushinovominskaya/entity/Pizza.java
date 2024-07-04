@@ -3,11 +3,13 @@ package com.vlad.sushinovominskaya.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "Пицца")
+@Table(name = "пицца")
 @Getter
 @Setter
+@ToString
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

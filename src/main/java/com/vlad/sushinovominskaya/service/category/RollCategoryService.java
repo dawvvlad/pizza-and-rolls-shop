@@ -9,8 +9,8 @@ import java.util.List;
 
 @Service
 public interface RollCategoryService {
-    void createCategory(String name, List<Roll> rollList);
-    void updateCategory(String name, List<Roll> rollList);
+    void createCategory(String name);
+    void updateCategory(Long id, List<Long> rollIds, String name);
     RollCategoryDTO getCategoryByName(String name);
     RollCategoryDTO getCategoryById(Long id);
     List<RollCategoryDTO> getAllCategories();

@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ApiController {
+public class ApiClientController {
 
     private final RollCategoryService rollCategoryService;
     private final RollService rollService;
@@ -27,11 +26,11 @@ public class ApiController {
     private final OrderService orderService;
 
     @Autowired
-    public ApiController(RollCategoryService rollCategoryService,
-                         PizzaService pizzaService,
-                         RollService rollService,
-                         RollSetService rollSetService,
-                         OrderService orderService) {
+    public ApiClientController(RollCategoryService rollCategoryService,
+                               PizzaService pizzaService,
+                               RollService rollService,
+                               RollSetService rollSetService,
+                               OrderService orderService) {
         this.rollCategoryService = rollCategoryService;
         this.rollSetService = rollSetService;
         this.pizzaService = pizzaService;

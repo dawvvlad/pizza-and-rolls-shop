@@ -4,7 +4,7 @@ import com.vlad.sushinovominskaya.entity.Order;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,16 +14,19 @@ public class OrderRepoImpl implements OrderRepo {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     @Override
     public void save(Order order) {
         entityManager.persist(order);
     }
 
+    @Transactional
     @Override
     public void delete(Order order) {
         entityManager.remove(order);
     }
 
+    @Transactional
     @Override
     public List<Order> findAll() {
         return entityManager
@@ -31,11 +34,13 @@ public class OrderRepoImpl implements OrderRepo {
                 .getResultList();
     }
 
+    @Transactional
     @Override
     public Order find(Long id) {
         return entityManager.find(Order.class, id);
     }
 
+    @Transactional
     @Override
     public Order findByPhoneNumber(String phoneNumber) {
         try {

@@ -3,14 +3,16 @@ package com.vlad.sushinovominskaya.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "КатегорииРоллов")
+@Table(name = "категории_роллов")
 @Setter
 @Getter
+@ToString
 public class RollCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

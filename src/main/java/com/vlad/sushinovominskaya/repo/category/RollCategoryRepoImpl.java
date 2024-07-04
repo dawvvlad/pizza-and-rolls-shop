@@ -4,7 +4,7 @@ import com.vlad.sushinovominskaya.entity.RollCategory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -20,6 +20,7 @@ public class RollCategoryRepoImpl implements RollCategoryRepo {
     @Override
     public void save(RollCategory rollCategory) {
         entityManager.persist(rollCategory);
+        System.out.println(rollCategory);
     }
 
     @Transactional

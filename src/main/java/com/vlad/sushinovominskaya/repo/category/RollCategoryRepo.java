@@ -1,6 +1,5 @@
 package com.vlad.sushinovominskaya.repo.category;
 
-import com.vlad.sushinovominskaya.entity.Roll;
 import com.vlad.sushinovominskaya.entity.RollCategory;
 import org.springframework.stereotype.Repository;
 

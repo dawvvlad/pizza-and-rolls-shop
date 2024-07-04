@@ -30,9 +30,9 @@ public class RollSet {
             CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
     @JoinTable(
-            name = "СоставыСетов",
-            joinColumns = @JoinColumn(name = "Сет"),
-            inverseJoinColumns = @JoinColumn(name = "Ролл")
+            name = "составы_сетов",
+            joinColumns = @JoinColumn(name = "сет"),
+            inverseJoinColumns = @JoinColumn(name = "ролл")
     )
     private List<Roll> rolls;
 

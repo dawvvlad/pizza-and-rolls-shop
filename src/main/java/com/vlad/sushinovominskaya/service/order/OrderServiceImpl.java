@@ -6,6 +6,9 @@ import com.vlad.sushinovominskaya.entity.Pizza;
 import com.vlad.sushinovominskaya.entity.Roll;
 import com.vlad.sushinovominskaya.entity.RollSet;
 import com.vlad.sushinovominskaya.repo.order.OrderRepo;
+import com.vlad.sushinovominskaya.repo.pizza.PizzaRepo;
+import com.vlad.sushinovominskaya.repo.roll.RollRepo;
+import com.vlad.sushinovominskaya.repo.set.RollSetRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,23 +20,39 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
+    private final PizzaRepo pizzaRepo;
+    private final RollRepo rollRepo;
+    private final RollSetRepo rollSetRepo;
 
     @Autowired
-    public OrderServiceImpl(OrderRepo orderRepo) {
+    public OrderServiceImpl(OrderRepo orderRepo, RollRepo rollRepo, RollSetRepo rollSetRepo, PizzaRepo pizzaRepo) {
         this.orderRepo = orderRepo;
+        this.rollRepo = rollRepo;
+        this.rollSetRepo = rollSetRepo;
+        this.pizzaRepo = pizzaRepo;
     }
 
 
     @Override
     public void createOrder(String customerName, String customerPhone,
                             Long totalPrice,
-                            List<Pizza> pizzaList,
-                            List<Roll> rollList,
-                            List<RollSet> rollSetList) {
+                            List<Long> pizzaIds,
+                            List<Long> rollIds,
+                            List<Long> rollSetIds) {
         Order order = new Order(customerName, customerPhone, totalPrice);
-        order.setPizzaList(pizzaList);
-        order.setRollList(rollList);
-        order.setRollSetList(rollSetList);
+
+        for (Long pizzaId : pizzaIds) {
+            Pizza pizza = pizzaRepo.find(pizzaId);
+            order.addPizza(pizza);
+        }
+        for (Long rollId : rollIds) {
+            Roll roll = rollRepo.find(rollId);
+            order.addRoll(roll);
+        }
+        for (Long rollSetId : rollSetIds) {
+            RollSet rollSet = rollSetRepo.find(rollSetId);
+            order.addSet(rollSet);
+        }
         orderRepo.save(order);
     }
 

@@ -4,8 +4,9 @@ import com.vlad.sushinovominskaya.entity.Pizza;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,9 +18,8 @@ public class PizzaRepoImpl implements PizzaRepo {
 
     @Transactional
     @Override
-    public Pizza save(Pizza pizza) {
+    public void save(Pizza pizza) {
         entityManager.persist(pizza);
-        return pizza;
     }
 
     @Transactional

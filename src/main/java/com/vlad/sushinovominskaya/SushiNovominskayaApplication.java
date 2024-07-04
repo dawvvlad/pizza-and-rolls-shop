@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SushiNovominskayaApplication {
     public static void main(String[] args) {
         SpringApplication.run(SushiNovominskayaApplication.class, args);
+
     }
 
 }
