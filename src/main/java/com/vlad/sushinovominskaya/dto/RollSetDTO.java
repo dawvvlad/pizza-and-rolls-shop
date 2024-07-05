@@ -15,10 +15,10 @@ public class RollSetDTO {
     private String name;
     private Long price;
     private String image;
-    private List<RollDTO> rolls = new ArrayList<>();
+    private List<Long> rolls = new ArrayList<>();
 
     public RollSetDTO() {}
-    public RollSetDTO(Long id, String name, Long price, String image, List<RollDTO> rolls) {
+    public RollSetDTO(Long id, String name, Long price, String image, List<Long> rolls) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -33,16 +33,16 @@ public class RollSetDTO {
         this.image = rollSet.getImagePath();
 
         for (Roll roll : rollSet.getRolls()) {
-            this.rolls.add(new RollDTO(roll));
+            this.rolls.add(roll.getId());
         }
     }
 
     public void addRollToSet(Roll roll) {
-        this.rolls.add(new RollDTO(roll));
+        this.rolls.add(roll.getId());
     }
 
     public void addRollToSet(RollDTO rollDTO) {
-        this.rolls.add(rollDTO);
+        this.rolls.add(rollDTO.getId());
     }
 
 }

@@ -1,15 +1,14 @@
-fetch("http://localhost:8080/api/v1/admin/createRoll", {
+fetch("http://localhost:8080/api/v1/admin/createSet", {
     method: "POST",
     headers: {
         "Content-type": "application/json",
     },
     body: JSON.stringify({
-        name: "Филадельфия",
-        category: "Жареные",
-        composition: "соус, рис",
-        price: 200,
-        image: "hi"
-        
+        name: "Домашний",
+        price: 2000,
+        image: "helloworld",
+        rolls: [2, 3]
+
     })
 })
 .then(data => data.json())

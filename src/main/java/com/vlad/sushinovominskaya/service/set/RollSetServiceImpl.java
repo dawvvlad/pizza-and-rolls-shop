@@ -55,8 +55,13 @@ public class RollSetServiceImpl implements RollSetService {
     public void createRollSet(RollSetDTO rollSetDTO) {
         RollSet rollSet = new RollSet();
         List<Roll> list = new ArrayList<>();
-        for(RollDTO roll : rollSetDTO.getRolls()) {
-            list.add(rollRepo.find(roll.getName()));
+
+        rollSet.setName(rollSetDTO.getName());
+        rollSet.setPrice(rollSetDTO.getPrice());
+        rollSet.setImagePath(rollSetDTO.getImage());
+
+        for(Long rollId : rollSetDTO.getRolls()) {
+            list.add(rollRepo.find(rollId));
         }
         if (list.isEmpty()) {
             rollSet.setRolls(Collections.emptyList());
