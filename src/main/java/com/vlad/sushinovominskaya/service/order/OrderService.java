@@ -7,12 +7,7 @@ import java.util.List;
 
 @Service
 public interface OrderService {
-    void createOrder(String customerName,
-                     String customerPhone,
-                     Long totalPrice,
-                     List<Long> pizzaList,
-                     List<Long> rollList,
-                     List<Long> rollSetList);
+    void createOrder(OrderCreateRequest orderCreateRequest);
     void deleteOrder(Long id);
     OrderDTO getOrder(Long id);
     OrderDTO getOrder(String phoneNumber);

@@ -37,6 +37,9 @@ public class RollServiceImpl implements RollService {
     public void update(Long id, RollDTO rollDTO) {
         RollCategory category = rollCategoryRepo.findByName(rollDTO.getCategory());
         Roll roll = rollRepo.find(id);
+        if(category == null) {
+            roll.setCategory(roll.getCategory());
+        }
         roll.setCategory(category);
         roll.setName(rollDTO.getName());
         roll.setComposition(rollDTO.getComposition());

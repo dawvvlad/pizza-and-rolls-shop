@@ -29,15 +29,12 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public void update(Long id, String name,
-                       Long size,
-                       Long price,
-                       String imagePath) {
+    public void update(Long id, PizzaDTO pizzaDTO) {
         Pizza pizza = pizzaRepo.find(id);
-        pizza.setName(name);
-        pizza.setSize(size);
-        pizza.setPrice(price);
-        pizza.setImagePath(imagePath);
+        pizza.setName(pizzaDTO.getName());
+        pizza.setSize(pizzaDTO.getSize());
+        pizza.setPrice(pizzaDTO.getPrice());
+        pizza.setImagePath(pizzaDTO.getImage());
         pizzaRepo.update(pizza);
     }
 

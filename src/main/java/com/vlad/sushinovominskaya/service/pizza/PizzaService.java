@@ -8,10 +8,7 @@ import java.util.List;
 @Service
 public interface PizzaService {
     void createPizza(PizzaDTO pizzaDTO);
-    void update(Long id, String name,
-                Long size,
-                Long price,
-                String imagePath);
+    void update(Long id, PizzaDTO pizzaDTO);
     List<PizzaDTO> findAll();
     PizzaDTO findById(Long id);
     PizzaDTO findByName(String name);

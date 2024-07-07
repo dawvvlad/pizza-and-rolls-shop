@@ -37,13 +37,15 @@ public class RollCategoryServiceImpl implements RollCategoryService {
         RollCategory rollCategory = rollCategoryRepo.findById(id);
         if(name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
-        } else rollCategory.setName(name);
-
+        }
+        if(rollIds.isEmpty()) {
+            rollCategory.setRolls(rollCategory.getRolls());
+        }
         for (Long rollId : rollIds) {
             Roll roll = rollRepo.find(rollId);
             rollCategory.addRoll(roll);
         }
-
+        rollCategory.setName(name);
         rollCategoryRepo.update(rollCategory);
     }
 

@@ -32,27 +32,37 @@ public class OrderServiceImpl implements OrderService {
         this.pizzaRepo = pizzaRepo;
     }
 
-
     @Override
-    public void createOrder(String customerName, String customerPhone,
-                            Long totalPrice,
-                            List<Long> pizzaIds,
-                            List<Long> rollIds,
-                            List<Long> rollSetIds) {
-        Order order = new Order(customerName, customerPhone, totalPrice);
+    public void createOrder(OrderCreateRequest orderCreateRequest) {
+        Order order = new Order(orderCreateRequest.getCustomerName(),
+                orderCreateRequest.getCustomerPhone(),
+                orderCreateRequest.getTotalPrice());
 
-        for (Long pizzaId : pizzaIds) {
-            Pizza pizza = pizzaRepo.find(pizzaId);
-            order.addPizza(pizza);
+        if(orderCreateRequest.getPizzaList().isEmpty()) {
+            order.setPizzaList(Collections.emptyList());
+        } else {
+            for (Long pizzaId : orderCreateRequest.getPizzaList()) {
+                Pizza pizza = pizzaRepo.find(pizzaId);
+                order.addPizza(pizza);
+            }
         }
-        for (Long rollId : rollIds) {
-            Roll roll = rollRepo.find(rollId);
-            order.addRoll(roll);
+        if(orderCreateRequest.getRollList().isEmpty()) {
+            order.setRollList(Collections.emptyList());
+        } else {
+            for (Long rollId: orderCreateRequest.getRollList()) {
+                Roll roll = rollRepo.find(rollId);
+                order.addRoll(roll);
+            }
         }
-        for (Long rollSetId : rollSetIds) {
-            RollSet rollSet = rollSetRepo.find(rollSetId);
-            order.addSet(rollSet);
+        if(orderCreateRequest.getRollSetList().isEmpty()) {
+            order.setRollSetList(Collections.emptyList());
+        } else {
+            for (Long rollSetId : orderCreateRequest.getRollSetList()) {
+                RollSet rollSet = rollSetRepo.find(rollSetId);
+                order.addSet(rollSet);
+            }
         }
+
         orderRepo.save(order);
     }
 
