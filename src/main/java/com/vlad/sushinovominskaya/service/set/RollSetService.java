@@ -12,5 +12,6 @@ public interface RollSetService {
     List<RollSetDTO> findAll();
     void createRollSet(RollSetDTO rollSetDTO);
     void delete(Long id);
+    void update(Long id, RollSetDTO rollSetDTO);
 
 }

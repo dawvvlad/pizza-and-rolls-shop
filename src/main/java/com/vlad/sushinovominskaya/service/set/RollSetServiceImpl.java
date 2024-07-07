@@ -76,4 +76,24 @@ public class RollSetServiceImpl implements RollSetService {
         RollSet rollSet = rollSetRepo.find(id);
         rollSetRepo.delete(rollSet);
     }
+
+    @Override
+    public void update(Long id, RollSetDTO rollSetDTO) {
+        RollSet rollSet = rollSetRepo.find(id);
+        rollSet.setName(rollSetDTO.getName());
+        rollSet.setPrice(rollSetDTO.getPrice());
+        rollSet.setImagePath(rollSetDTO.getImage());
+
+        List<Roll> list = new ArrayList<>();
+        for(Long rollId : rollSetDTO.getRolls()) {
+            list.add(rollRepo.find(rollId));
+        }
+        if (list.isEmpty()) {
+            rollSet.setRolls(rollSet.getRolls());
+        }
+
+        rollSet.setRolls(list);
+
+        rollSetRepo.update(rollSet);
+    }
 }
