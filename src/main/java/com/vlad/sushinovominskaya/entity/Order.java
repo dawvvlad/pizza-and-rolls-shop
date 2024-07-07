@@ -30,7 +30,7 @@ public class Order {
             CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
     @JoinTable(
-            name = "ЗаказИнфо",
+            name = "заказ_инфо",
             joinColumns = @JoinColumn(name = "номер_заказа"),
             inverseJoinColumns = @JoinColumn(name = "роллы")
     )
@@ -40,7 +40,7 @@ public class Order {
             CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
     @JoinTable(
-            name = "ЗаказИнфо",
+            name = "заказ_инфо",
             joinColumns = @JoinColumn(name = "номер_заказа"),
             inverseJoinColumns = @JoinColumn(name = "сеты")
     )
@@ -50,7 +50,7 @@ public class Order {
             CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
     @JoinTable(
-            name = "ЗаказИнфо",
+            name = "заказ_инфо",
             joinColumns = @JoinColumn(name = "номер_заказа"),
             inverseJoinColumns = @JoinColumn(name = "пицца")
     )

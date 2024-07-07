@@ -31,12 +31,15 @@ public class OrderDTO {
 
         for (Pizza pizza : order.getPizzaList()) {
             PizzaDTO pizzaDTO = new PizzaDTO(pizza);
+            this.pizzaList.add(pizzaDTO);
         }
         for (Roll roll : order.getRollList()) {
             RollDTO rollDTO = new RollDTO(roll);
+            this.rollList.add(rollDTO);
         }
         for (RollSet rollSet : order.getRollSetList()) {
             RollSetDTO rollSetDTO = new RollSetDTO(rollSet);
+            this.rollSetList.add(rollSetDTO);
         }
     }
 
