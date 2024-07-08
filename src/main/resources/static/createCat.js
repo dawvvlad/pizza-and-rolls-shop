@@ -15,10 +15,10 @@
 // .then(e => console.log(e))
 // .catch(error => console.error('Error:', error));
 
-fetch("http://localhost:8080/api/v1/admin/orders")
-.then(data => data.json())
-.then(e => console.log(e[0]))
-.catch(error => console.error('Error:', error));
+// fetch("http://localhost:8080/api/v1/rolls")
+// .then(data => data.json())
+// .then(e => console.log(e[0]))
+// .catch(error => console.error('Error:', error));
 
 // fetch("http://localhost:8080/api/v1/admin/updateRoll/2", {
 //     method: "PATCH",
@@ -54,3 +54,8 @@ fetch("http://localhost:8080/api/v1/admin/orders")
 // .then(data => data.json())
 // .then(e => console.log(e))
 // .catch(error => console.error('Error:', error));
+
+fetch("http://localhost:8080/api/v1/admin/orders")
+.then(data => data.json())
+.then(e => console.log(e))
+.catch(error => console.error('Error:', error));

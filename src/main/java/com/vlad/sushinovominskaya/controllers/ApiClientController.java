@@ -1,6 +1,7 @@
 package com.vlad.sushinovominskaya.controllers;
 
 import com.vlad.sushinovominskaya.dto.*;
+import com.vlad.sushinovominskaya.entity.User;
 import com.vlad.sushinovominskaya.service.category.RollCategoryService;
 import com.vlad.sushinovominskaya.service.order.OrderCreateRequest;
 import com.vlad.sushinovominskaya.service.order.OrderService;

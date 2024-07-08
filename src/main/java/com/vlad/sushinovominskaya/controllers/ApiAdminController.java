@@ -1,7 +1,6 @@
 package com.vlad.sushinovominskaya.controllers;
 
 import com.vlad.sushinovominskaya.dto.*;
-import com.vlad.sushinovominskaya.entity.Roll;
 import com.vlad.sushinovominskaya.service.category.RollCategoryService;
 import com.vlad.sushinovominskaya.service.order.OrderService;
 import com.vlad.sushinovominskaya.service.pizza.PizzaService;
@@ -10,12 +9,14 @@ import com.vlad.sushinovominskaya.service.set.RollSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/admin")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ApiAdminController {
 
     private final OrderService orderService;
@@ -26,7 +27,7 @@ public class ApiAdminController {
 
     @Autowired
     public ApiAdminController(OrderService orderService,
-            RollCategoryService rollCategoryService,
+                              RollCategoryService rollCategoryService,
                               PizzaService pizzaService,
                               RollService rollService,
                               RollSetService rollSetService) {
@@ -35,6 +36,7 @@ public class ApiAdminController {
         this.pizzaService = pizzaService;
         this.rollService = rollService;
         this.rollSetService = rollSetService;
+
     }
 
     @PostMapping("/createCategory")
@@ -84,4 +86,5 @@ public class ApiAdminController {
         List<OrderDTO> list = orderService.getAllOrders();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
+
 }
