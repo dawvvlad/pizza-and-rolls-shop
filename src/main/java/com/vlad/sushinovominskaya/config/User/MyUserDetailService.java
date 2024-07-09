@@ -23,7 +23,6 @@ public class MyUserDetailService implements UserDetailsService {
             return new MyUserDetail(user);
         } catch (UsernameNotFoundException e) {
             throw new UsernameNotFoundException("Пользователь не найден");
-
         }
     }
 }

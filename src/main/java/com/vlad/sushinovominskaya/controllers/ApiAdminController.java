@@ -95,7 +95,7 @@ public class ApiAdminController {
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
-    @PatchMapping("changePassword/{username}")
+    @PatchMapping("/changePassword/{username}")
     public ResponseEntity<User> changePass(@PathVariable("username") String username, @RequestBody Map<String, String> req) {
        User user =  userRepo.changePassword(username, req.get("password"));
        return ResponseEntity.status(HttpStatus.OK).body(user);
