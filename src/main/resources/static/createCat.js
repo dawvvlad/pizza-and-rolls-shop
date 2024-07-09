@@ -55,7 +55,20 @@
 // .then(e => console.log(e))
 // .catch(error => console.error('Error:', error));
 
-fetch("http://localhost:8080/api/v1/admin/orders")
+// fetch("http://localhost:8080/api/v1/admin/orders")
+// .then(data => data.json())
+// .then(e => console.log(e))
+// .catch(error => console.error('Error:', error));
+
+fetch("http://localhost:8080/api/v1/admin/changePassword/admin", {
+    method: "PATCH",
+    headers: {
+        "Content-type": "application/json"
+    },
+    body: JSON.stringify({
+        password: "admin"
+    })
+})
 .then(data => data.json())
 .then(e => console.log(e))
 .catch(error => console.error('Error:', error));

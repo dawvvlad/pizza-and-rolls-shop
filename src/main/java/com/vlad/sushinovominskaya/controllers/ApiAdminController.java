@@ -1,6 +1,8 @@
 package com.vlad.sushinovominskaya.controllers;
 
 import com.vlad.sushinovominskaya.dto.*;
+import com.vlad.sushinovominskaya.entity.User;
+import com.vlad.sushinovominskaya.repo.user.UserRepo;
 import com.vlad.sushinovominskaya.service.category.RollCategoryService;
 import com.vlad.sushinovominskaya.service.order.OrderService;
 import com.vlad.sushinovominskaya.service.pizza.PizzaService;
@@ -13,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -25,17 +28,22 @@ public class ApiAdminController {
     private final RollService rollService;
     private final RollSetService rollSetService;
 
+
+    private UserRepo userRepo;
+
     @Autowired
     public ApiAdminController(OrderService orderService,
                               RollCategoryService rollCategoryService,
                               PizzaService pizzaService,
                               RollService rollService,
-                              RollSetService rollSetService) {
+                              RollSetService rollSetService,
+                              UserRepo userRepo) {
         this.orderService = orderService;
         this.rollCategoryService = rollCategoryService;
         this.pizzaService = pizzaService;
         this.rollService = rollService;
         this.rollSetService = rollSetService;
+        this.userRepo = userRepo;
 
     }
 
@@ -85,6 +93,12 @@ public class ApiAdminController {
     public ResponseEntity<List<OrderDTO>> getOrders() {
         List<OrderDTO> list = orderService.getAllOrders();
         return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @PatchMapping("changePassword/{username}")
+    public ResponseEntity<User> changePass(@PathVariable("username") String username, @RequestBody Map<String, String> req) {
+       User user =  userRepo.changePassword(username, req.get("password"));
+       return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 }

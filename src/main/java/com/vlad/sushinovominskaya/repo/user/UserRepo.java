@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface UserRepo {
     User findByUsername(String username);
     User findById(Long id);
-    void create(User user);
+    User changePassword(String username, String password);
 }

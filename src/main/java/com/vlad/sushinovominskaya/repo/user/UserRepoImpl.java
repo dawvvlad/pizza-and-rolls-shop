@@ -1,26 +1,21 @@
 package com.vlad.sushinovominskaya.repo.user;
 
+import com.vlad.sushinovominskaya.config.User.MyUserDetail;
+import com.vlad.sushinovominskaya.config.User.MyUserDetailService;
 import com.vlad.sushinovominskaya.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserRepoImpl implements UserRepo {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    public UserRepoImpl(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
+    @Transactional
     @Override
     public User findByUsername(String username) {
         try {
@@ -32,18 +27,22 @@ public class UserRepoImpl implements UserRepo {
         }
     }
 
+    @Transactional
     @Override
     public User findById(Long id) {
         return entityManager.find(User.class, id);
     }
 
-    public void create(User user) {
-        User newUser = new User();
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        newUser.setRole(user.getRole());
-        entityManager.persist(newUser);
+    @Transactional
+    @Override
+    public User changePassword(String username, String password) {
+        User user = findByUsername(username);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(password));
+        entityManager.merge(user);
 
-        System.out.println("hi");
+        return user;
     }
+
+
 }
